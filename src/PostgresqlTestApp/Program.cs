@@ -1,12 +1,18 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using Postgres.Domain.Entities;
+using Postgres.Persistance;
 
 namespace PostgresqlTestApp
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            using (FrcContext context = new FrcContext(new DbContextOptionsBuilder<FrcContext>().UseNpgsql(
+                "Host = localhost; Port = 5442; Database = FrcTest; Username = postgres; Password = postgres").Options))
+            {
+                FrcContextInitializer.Initialize(context);
+            }
         }
     }
 }

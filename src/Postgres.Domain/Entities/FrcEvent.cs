@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Postgres.Domain.Entities
 {
-    public class Event
+    public class FrcEvent
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -18,5 +18,8 @@ namespace Postgres.Domain.Entities
 
         public DateTime Timestamp { get; set; }
         public byte[] BestImage { get; set; }
+
+        public Guid AggregatedEventsId { get; set; }
+        public AggregatedEvents AggregatedEvents { get; set; }
     }
 }

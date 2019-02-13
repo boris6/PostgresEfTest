@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using PostGresWeb;
+using Postgres.Persistance;
 
-namespace PostGresWeb.Migrations
+namespace Postgres.Persistance.Migrations
 {
     [DbContext(typeof(FrcContext))]
     partial class FrcContextModelSnapshot : ModelSnapshot
@@ -19,7 +19,7 @@ namespace PostGresWeb.Migrations
                 .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("PostGresWeb.AggregatedEvents", b =>
+            modelBuilder.Entity("Postgres.Domain.Entities.AggregatedEvents", b =>
                 {
                     b.Property<Guid>("AggregatedEventsId")
                         .ValueGeneratedOnAdd();
@@ -39,12 +39,12 @@ namespace PostGresWeb.Migrations
                     b.ToTable("AggregatedEvents");
                 });
 
-            modelBuilder.Entity("PostGresWeb.Event", b =>
+            modelBuilder.Entity("Postgres.Domain.Entities.FrcEvent", b =>
                 {
                     b.Property<int>("EventId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("AggregatedEventsId");
+                    b.Property<Guid>("AggregatedEventsId");
 
                     b.Property<byte[]>("BestImage");
 
@@ -63,7 +63,7 @@ namespace PostGresWeb.Migrations
                     b.ToTable("Events");
                 });
 
-            modelBuilder.Entity("PostGresWeb.Identity", b =>
+            modelBuilder.Entity("Postgres.Domain.Entities.Identity", b =>
                 {
                     b.Property<int>("IdentityId")
                         .ValueGeneratedOnAdd();
@@ -77,11 +77,12 @@ namespace PostGresWeb.Migrations
                     b.ToTable("Identities");
                 });
 
-            modelBuilder.Entity("PostGresWeb.Event", b =>
+            modelBuilder.Entity("Postgres.Domain.Entities.FrcEvent", b =>
                 {
-                    b.HasOne("PostGresWeb.AggregatedEvents")
-                        .WithMany("Events")
-                        .HasForeignKey("AggregatedEventsId");
+                    b.HasOne("Postgres.Domain.Entities.AggregatedEvents", "AggregatedEvents")
+                        .WithMany("FrcEvent")
+                        .HasForeignKey("AggregatedEventsId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
