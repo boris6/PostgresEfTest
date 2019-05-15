@@ -10,8 +10,8 @@ using Postgres.Persistance;
 namespace Postgres.Persistance.Migrations
 {
     [DbContext(typeof(FrcContext))]
-    [Migration("20190213205554_somethingSomethingSomething")]
-    partial class somethingSomethingSomething
+    [Migration("20190227115925_ConfidenceAddition")]
+    partial class ConfidenceAddition
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,13 +28,17 @@ namespace Postgres.Persistance.Migrations
 
                     b.Property<byte[]>("BestImage");
 
-                    b.Property<int>("IdentityId");
+                    b.Property<string>("CameraId");
+
+                    b.Property<double>("Confidence");
+
+                    b.Property<string>("IdentityId");
 
                     b.Property<bool>("Recognized");
 
-                    b.Property<DateTime>("TimestampEnd");
+                    b.Property<DateTimeOffset>("TimestampEnd");
 
-                    b.Property<DateTime>("TimestampStart");
+                    b.Property<DateTimeOffset>("TimestampStart");
 
                     b.HasKey("AggregatedEventsId");
 
@@ -43,22 +47,26 @@ namespace Postgres.Persistance.Migrations
 
             modelBuilder.Entity("Postgres.Domain.Entities.FrcEvent", b =>
                 {
-                    b.Property<int>("EventId")
+                    b.Property<int>("FrcEventId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("AggregatedEventsId");
 
-                    b.Property<byte[]>("BestImage");
-
                     b.Property<string>("Confidence")
                         .HasColumnType("jsonb");
+
+                    b.Property<int>("Framenumber");
+
+                    b.Property<string>("HeadId");
+
+                    b.Property<byte[]>("Image");
 
                     b.Property<string>("Rectangle")
                         .HasColumnType("jsonb");
 
-                    b.Property<DateTime>("Timestamp");
+                    b.Property<DateTimeOffset>("Timestamp");
 
-                    b.HasKey("EventId");
+                    b.HasKey("FrcEventId");
 
                     b.HasIndex("AggregatedEventsId");
 
@@ -67,12 +75,22 @@ namespace Postgres.Persistance.Migrations
 
             modelBuilder.Entity("Postgres.Domain.Entities.Identity", b =>
                 {
-                    b.Property<int>("IdentityId")
+                    b.Property<string>("IdentityId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Age");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("FirstName");
+
+                    b.Property<int>("Gender");
+
+                    b.Property<byte[]>("Image");
+
+                    b.Property<string>("Info");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("MiddleName");
 
                     b.HasKey("IdentityId");
 

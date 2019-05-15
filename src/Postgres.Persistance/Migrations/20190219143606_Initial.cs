@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Postgres.Persistance.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,10 +13,11 @@ namespace Postgres.Persistance.Migrations
                 columns: table => new
                 {
                     AggregatedEventsId = table.Column<Guid>(nullable: false),
-                    IdentityId = table.Column<int>(nullable: false),
+                    IdentityId = table.Column<string>(nullable: true),
                     Recognized = table.Column<bool>(nullable: false),
-                    TimestampStart = table.Column<DateTime>(nullable: false),
-                    TimestampEnd = table.Column<DateTime>(nullable: false),
+                    CameraId = table.Column<string>(nullable: true),
+                    TimestampStart = table.Column<DateTimeOffset>(nullable: false),
+                    TimestampEnd = table.Column<DateTimeOffset>(nullable: false),
                     BestImage = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
@@ -28,10 +29,14 @@ namespace Postgres.Persistance.Migrations
                 name: "Identities",
                 columns: table => new
                 {
-                    IdentityId = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
-                    Name = table.Column<string>(nullable: true),
-                    Age = table.Column<int>(nullable: false)
+                    IdentityId = table.Column<string>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    MiddleName = table.Column<string>(nullable: true),
+                    Age = table.Column<int>(nullable: false),
+                    Gender = table.Column<int>(nullable: false),
+                    Info = table.Column<string>(nullable: true),
+                    Image = table.Column<byte[]>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -42,23 +47,25 @@ namespace Postgres.Persistance.Migrations
                 name: "Events",
                 columns: table => new
                 {
-                    EventId = table.Column<int>(nullable: false)
+                    FrcEventId = table.Column<int>(nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
                     Rectangle = table.Column<string>(type: "jsonb", nullable: true),
                     Confidence = table.Column<string>(type: "jsonb", nullable: true),
-                    Timestamp = table.Column<DateTime>(nullable: false),
-                    BestImage = table.Column<byte[]>(nullable: true),
-                    AggregatedEventsId = table.Column<Guid>(nullable: true)
+                    Timestamp = table.Column<DateTimeOffset>(nullable: false),
+                    Image = table.Column<byte[]>(nullable: true),
+                    Framenumber = table.Column<int>(nullable: false),
+                    HeadId = table.Column<string>(nullable: true),
+                    AggregatedEventsId = table.Column<Guid>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Events", x => x.EventId);
+                    table.PrimaryKey("PK_Events", x => x.FrcEventId);
                     table.ForeignKey(
                         name: "FK_Events_AggregatedEvents_AggregatedEventsId",
                         column: x => x.AggregatedEventsId,
                         principalTable: "AggregatedEvents",
                         principalColumn: "AggregatedEventsId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

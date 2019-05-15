@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Postgres.Persistance;
@@ -9,9 +10,10 @@ using Postgres.Persistance;
 namespace Postgres.Persistance.Migrations
 {
     [DbContext(typeof(FrcContext))]
-    partial class FrcContextModelSnapshot : ModelSnapshot
+    [Migration("20190304140350_IdentityGroup")]
+    partial class IdentityGroup
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,8 +105,6 @@ namespace Postgres.Persistance.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Age");
-
-                    b.Property<string>("ExternalId");
 
                     b.Property<string>("FirstName");
 

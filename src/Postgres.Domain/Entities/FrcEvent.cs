@@ -1,24 +1,20 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Postgres.Domain.Entities
 {
     public class FrcEvent
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int EventId { get; set; }
+        public int FrcEventId { get; set; }
 
-        [Column(TypeName = "jsonb")]
         public string Rectangle { get; set; }
 
-        [Column(TypeName = "jsonb")]
         public string Confidence { get; set; }
 
-        public DateTime Timestamp { get; set; }
-        public byte[] BestImage { get; set; }
-
+        public DateTimeOffset Timestamp { get; set; }
+        public byte[] Image { get; set; }
+        public int Framenumber { get; set; }
+        public string HeadId { get; set; }
+        public ulong EventId { get; set; }
         public Guid AggregatedEventsId { get; set; }
         public AggregatedEvents AggregatedEvents { get; set; }
     }

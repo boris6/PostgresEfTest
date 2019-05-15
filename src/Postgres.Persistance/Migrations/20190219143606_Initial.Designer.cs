@@ -10,8 +10,8 @@ using Postgres.Persistance;
 namespace Postgres.Persistance.Migrations
 {
     [DbContext(typeof(FrcContext))]
-    [Migration("20190213194610_initial")]
-    partial class initial
+    [Migration("20190219143606_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,37 +28,43 @@ namespace Postgres.Persistance.Migrations
 
                     b.Property<byte[]>("BestImage");
 
-                    b.Property<int>("IdentityId");
+                    b.Property<string>("CameraId");
+
+                    b.Property<string>("IdentityId");
 
                     b.Property<bool>("Recognized");
 
-                    b.Property<DateTime>("TimestampEnd");
+                    b.Property<DateTimeOffset>("TimestampEnd");
 
-                    b.Property<DateTime>("TimestampStart");
+                    b.Property<DateTimeOffset>("TimestampStart");
 
                     b.HasKey("AggregatedEventsId");
 
                     b.ToTable("AggregatedEvents");
                 });
 
-            modelBuilder.Entity("Postgres.Domain.Entities.Event", b =>
+            modelBuilder.Entity("Postgres.Domain.Entities.FrcEvent", b =>
                 {
-                    b.Property<int>("EventId")
+                    b.Property<int>("FrcEventId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid?>("AggregatedEventsId");
-
-                    b.Property<byte[]>("BestImage");
+                    b.Property<Guid>("AggregatedEventsId");
 
                     b.Property<string>("Confidence")
                         .HasColumnType("jsonb");
 
+                    b.Property<int>("Framenumber");
+
+                    b.Property<string>("HeadId");
+
+                    b.Property<byte[]>("Image");
+
                     b.Property<string>("Rectangle")
                         .HasColumnType("jsonb");
 
-                    b.Property<DateTime>("Timestamp");
+                    b.Property<DateTimeOffset>("Timestamp");
 
-                    b.HasKey("EventId");
+                    b.HasKey("FrcEventId");
 
                     b.HasIndex("AggregatedEventsId");
 
@@ -67,23 +73,34 @@ namespace Postgres.Persistance.Migrations
 
             modelBuilder.Entity("Postgres.Domain.Entities.Identity", b =>
                 {
-                    b.Property<int>("IdentityId")
+                    b.Property<string>("IdentityId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Age");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("FirstName");
+
+                    b.Property<int>("Gender");
+
+                    b.Property<byte[]>("Image");
+
+                    b.Property<string>("Info");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("MiddleName");
 
                     b.HasKey("IdentityId");
 
                     b.ToTable("Identities");
                 });
 
-            modelBuilder.Entity("Postgres.Domain.Entities.Event", b =>
+            modelBuilder.Entity("Postgres.Domain.Entities.FrcEvent", b =>
                 {
-                    b.HasOne("Postgres.Domain.Entities.AggregatedEvents")
-                        .WithMany("Events")
-                        .HasForeignKey("AggregatedEventsId");
+                    b.HasOne("Postgres.Domain.Entities.AggregatedEvents", "AggregatedEvents")
+                        .WithMany("FrcEvent")
+                        .HasForeignKey("AggregatedEventsId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }
