@@ -6,6 +6,7 @@ namespace Postgres.Domain.Entities
     {
         public Identity()
         {
+            ReferenceImages = new HashSet<ReferenceImage>();
             IdentityGroups = new HashSet<IdentityGroup>();
         }
 
@@ -17,9 +18,9 @@ namespace Postgres.Domain.Entities
         public int Age { get; set; }
         public int Gender { get; set; }
         public string Info { get; set; }
-        public byte[] Image { get; set; }
         public string ExternalId { get; set; }
 
-        public ICollection<IdentityGroup> IdentityGroups { get; private set; }
+        public ICollection<IdentityGroup> IdentityGroups { get; }
+        public ICollection<ReferenceImage> ReferenceImages { get; }
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Postgres.Persistance;
@@ -9,9 +10,10 @@ using Postgres.Persistance;
 namespace Postgres.Persistance.Migrations
 {
     [DbContext(typeof(FrcContext))]
-    partial class FrcContextModelSnapshot : ModelSnapshot
+    [Migration("20190515133456_AddProperty")]
+    partial class AddProperty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -113,6 +115,8 @@ namespace Postgres.Persistance.Migrations
 
                     b.Property<int>("Gender");
 
+                    b.Property<byte[]>("Image");
+
                     b.Property<string>("Info");
 
                     b.Property<string>("LastName");
@@ -137,22 +141,6 @@ namespace Postgres.Persistance.Migrations
                     b.ToTable("IdentityGroups");
                 });
 
-            modelBuilder.Entity("Postgres.Domain.Entities.ReferenceImage", b =>
-                {
-                    b.Property<int>("ReferenceImageId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("IdentityId");
-
-                    b.Property<byte[]>("Image");
-
-                    b.HasKey("ReferenceImageId");
-
-                    b.HasIndex("IdentityId");
-
-                    b.ToTable("ReferenceImages");
-                });
-
             modelBuilder.Entity("Postgres.Domain.Entities.FrcEvent", b =>
                 {
                     b.HasOne("Postgres.Domain.Entities.AggregatedEvents", "AggregatedEvents")
@@ -172,13 +160,6 @@ namespace Postgres.Persistance.Migrations
                         .WithMany("IdentityGroups")
                         .HasForeignKey("IdentityId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Postgres.Domain.Entities.ReferenceImage", b =>
-                {
-                    b.HasOne("Postgres.Domain.Entities.Identity", "Identity")
-                        .WithMany("ReferenceImages")
-                        .HasForeignKey("IdentityId");
                 });
 #pragma warning restore 612, 618
         }
