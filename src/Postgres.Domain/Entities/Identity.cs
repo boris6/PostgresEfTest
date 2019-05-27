@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Postgres.Domain.Entities
 {
@@ -14,7 +15,7 @@ namespace Postgres.Domain.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }
-        public int? Age { get; set; }
+        public DateTime? BirthDate { get; set; }
         public int? Gender { get; set; }
         public string Info { get; set; }
         public string ExternalId { get; set; }
