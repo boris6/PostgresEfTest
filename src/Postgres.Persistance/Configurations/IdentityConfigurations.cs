@@ -11,6 +11,8 @@ namespace Postgres.Persistance.Configurations
             builder.Property(e => e.MiddleName).IsRequired(false);
             builder.Property(e => e.Info).IsRequired(false);
             builder.Property(e => e.BirthDate).HasColumnType("date");
+            builder.HasMany(s => s.ReferenceImages).WithOne(w => w.Identity).IsRequired();
+
 
         }
     }

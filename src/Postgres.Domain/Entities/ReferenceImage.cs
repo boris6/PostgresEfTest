@@ -7,5 +7,8 @@
 
         public string IdentityId { get; set; }
         public Identity Identity { get; set; }
+
+        public string ExternalImageId { get; set; }
+
     }
 }
