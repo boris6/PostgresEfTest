@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\HitachiSyncService.Persistance\HitachiSyncService.Persistance.csproj" />
     <ProjectReference Include="..\Postgres.Persistance\Postgres.Persistance.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using HitachiSyncService.Persistance;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,9 @@ namespace PostGresWeb
 
             services.AddDbContext<FrcContext>(options =>
                 options.UseNpgsql("Host=localhost;Port=5442;Database=FrcTest;Username=postgres;Password=postgres"));
+
+            services.AddDbContext<HitachiSyncContext>(options =>
+                options.UseNpgsql("Host=localhost;Port=5442;Database=HitachiSync;Username=postgres;Password=postgres"));
 
             services.AddSwaggerGen(c =>
             {
