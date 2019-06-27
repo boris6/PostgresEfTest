@@ -7,11 +7,10 @@ namespace Postgres.Domain.Entities
     {
         public Identity()
         {
-            IdentityGroups = new HashSet<IdentityGroup>();
+            IdentityCategories = new HashSet<IdentityCategory>();
         }
 
         public string IdentityId { get; set; }
-
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }
@@ -20,9 +19,9 @@ namespace Postgres.Domain.Entities
         public string Info { get; set; }
         public string ExternalId { get; set; }
         public string Group { get; set; }
-
-
-        public ICollection<IdentityGroup> IdentityGroups { get; }
+        public string AddedBy { get; set; }
+        public DateTime? AddedAt { get; set; }
+        public ICollection<IdentityCategory> IdentityCategories { get; }
         public List<ReferenceImage> ReferenceImages { get; set; }
     }
 }

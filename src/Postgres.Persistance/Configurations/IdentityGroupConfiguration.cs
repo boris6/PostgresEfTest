@@ -4,19 +4,19 @@ using Postgres.Domain.Entities;
 
 namespace Postgres.Persistance.Configurations
 {
-    public class IdentityGroupConfiguration : IEntityTypeConfiguration<IdentityGroup>
+    public class IdentityCategoryConfiguration : IEntityTypeConfiguration<IdentityCategory>
     {
-        public void Configure(EntityTypeBuilder<IdentityGroup> builder)
+        public void Configure(EntityTypeBuilder<IdentityCategory> builder)
         {
-            builder.HasKey(k => new { k.IdentityId, k.GroupId });
+            builder.HasKey(k => new {k.IdentityId, k.CategoryId});
 
             builder.HasOne(d => d.Identity)
-                .WithMany(p => p.IdentityGroups)
+                .WithMany(p => p.IdentityCategories)
                 .HasForeignKey(d => d.IdentityId);
 
-            builder.HasOne(d => d.Group)
-                .WithMany(p => p.IdentityGroups)
-                .HasForeignKey(d => d.GroupId);
+            builder.HasOne(d => d.Category)
+                .WithMany(p => p.IdentityCategories)
+                .HasForeignKey(d => d.CategoryId);
         }
     }
 }

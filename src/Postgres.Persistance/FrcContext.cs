@@ -13,9 +13,9 @@ namespace Postgres.Persistance
         public DbSet<Identity> Identities { get; set; }
         public DbSet<FrcEvent> Events { get; set; }
         public DbSet<Camera> Cameras { get; set; }
-        public DbSet<Group> Groups { get; set; }
+        public DbSet<Category> Categories { get; set; }
         public DbSet<ReferenceImage> ReferenceImages { get; set; }
-        public DbSet<IdentityGroup> IdentityGroups { get; set; }
+        public DbSet<IdentityCategory> IdentityCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
