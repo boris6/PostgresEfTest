@@ -9,6 +9,8 @@
         public Identity Identity { get; set; }
 
         public string ExternalImageId { get; set; }
+        public bool MainReferenceImage { get; set; }
+
 
     }
 }
