@@ -21,6 +21,7 @@ namespace Postgres.Domain.Entities
         public string Group { get; set; }
         public string AddedBy { get; set; }
         public DateTime? AddedAt { get; set; }
+        public Guid ReferenceImageId { get; set; }
         public ICollection<IdentityCategory> IdentityCategories { get; }
         public List<ReferenceImage> ReferenceImages { get; set; }
     }

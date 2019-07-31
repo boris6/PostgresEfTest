@@ -1,16 +1,13 @@
-﻿namespace Postgres.Domain.Entities
+﻿using System;
+
+namespace Postgres.Domain.Entities
 {
     public class ReferenceImage
     {
-        public int ReferenceImageId { get; set; }
+        public Guid ReferenceImageId { get; set; }
         public byte[] Image { get; set; }
-
         public string IdentityId { get; set; }
         public Identity Identity { get; set; }
-
         public string ExternalImageId { get; set; }
-        public bool MainReferenceImage { get; set; }
-
-
     }
 }
