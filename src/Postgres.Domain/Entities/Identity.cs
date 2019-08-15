@@ -17,6 +17,14 @@ namespace Postgres.Domain.Entities
         public DateTime? BirthDate { get; set; }
         public int? Gender { get; set; }
         public string Info { get; set; }
+        public DateTime? ExpiryDate { get; set; }
+        public bool? Active { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string PostalCode { get; set; }
+        public string Country { get; set; }
+        public string TelephoneNumber { get; set; }
+        public string Email { get; set; }
         public string ExternalId { get; set; }
         public string Group { get; set; }
         public string AddedBy { get; set; }
