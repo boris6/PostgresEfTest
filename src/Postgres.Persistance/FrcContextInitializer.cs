@@ -40,7 +40,7 @@ namespace Postgres.Persistance
                     Recognized = true,
                     TimestampStart = DateTime.Now,
                     TimestampEnd = DateTime.Now.AddSeconds(100),
-                    CameraId = "StreetCamera"
+                    CameraId = Guid.NewGuid()
                 };
                 events.Add(aggregatedEvent);
             }
