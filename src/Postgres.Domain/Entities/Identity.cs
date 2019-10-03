@@ -12,8 +12,8 @@ namespace Postgres.Domain.Entities
             ReferenceImages = new List<ReferenceImage>();
         }
 
-        public string IdentityId { get; set; }
-        public string CustomerId { get; set; }
+        public Guid IdentityId { get; set; }
+        public Guid CustomerId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string MiddleName { get; set; }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Postgres.Domain.Entities
 {
@@ -10,8 +11,8 @@ namespace Postgres.Domain.Entities
             SubCategories = new HashSet<SubCategory>();
         }
 
-        public string CategoryId { get; set; }
-        public string CustomerId { get; set; }
+        public Guid CategoryId { get; set; }
+        public Guid CustomerId { get; set; }
         public string CategoryName { get; set; }
 
         public string Description { get; set; }

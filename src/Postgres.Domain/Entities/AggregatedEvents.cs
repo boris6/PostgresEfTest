@@ -11,7 +11,7 @@ namespace Postgres.Domain.Entities
         }
 
         public Guid AggregatedEventsId { get; set; }
-        public string IdentityId { get; set; }
+        public Guid IdentityId { get; set; }
         public bool Recognized { get; set; }
         public Guid CameraId { get; set; }
         public DateTimeOffset TimestampStart { get; set; }

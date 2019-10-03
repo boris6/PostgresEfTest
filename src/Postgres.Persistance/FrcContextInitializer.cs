@@ -36,7 +36,7 @@ namespace Postgres.Persistance
                 var aggregatedEvent = new AggregatedEvents
                 {
                     BestImage = bytes,
-                    IdentityId = rand.Next(0, 100).ToString(),
+                    IdentityId = Guid.NewGuid(),
                     Recognized = true,
                     TimestampStart = DateTime.Now,
                     TimestampEnd = DateTime.Now.AddSeconds(100),
