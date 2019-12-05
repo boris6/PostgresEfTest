@@ -17,7 +17,7 @@ namespace Postgres.Persistance
         public DbSet<ReferenceImage> ReferenceImages { get; set; }
         public DbSet<IdentityCategory> IdentityCategories { get; set; }
         public DbSet<Setting> Settings { get; set; }
-
+        public DbSet<FeatureVector> FeatureVectors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
