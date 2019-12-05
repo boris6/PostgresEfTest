@@ -12,6 +12,8 @@ namespace Postgres.Domain.Entities
         public int Framenumber { get; set; }
         public string HeadId { get; set; }
         public ulong EventId { get; set; }
+        public double FaceConfidence { get; set; }
+
 
         public Guid AggregatedEventsId { get; set; }
         public AggregatedEvents AggregatedEvents { get; set; }

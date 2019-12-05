@@ -19,5 +19,7 @@ namespace Postgres.Domain.Entities
         public byte[] BestImage { get; set; }
         public double Confidence { get; set; }
         public ICollection<FrcEvent> FrcEvent { get; }
+        public double FaceConfidence { get; set; }
+
     }
 }
